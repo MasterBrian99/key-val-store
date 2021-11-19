@@ -1,7 +1,9 @@
+import { Values } from './../values/values.entity';
 import {
   BaseEntity,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
@@ -14,4 +16,7 @@ export class Register extends BaseEntity {
 
   @Column()
   apiKey: string;
+
+  @OneToMany(() => Values, (values) => values.register, { eager: true })
+  values: Values[];
 }

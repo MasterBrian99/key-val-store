@@ -2,7 +2,10 @@ import * as generateApiKey from 'generate-api-key';
 import { Register } from './register.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { RegisterResponse } from './dto/register-response.dto';
-import { InternalServerErrorException } from '@nestjs/common';
+import {
+  InternalServerErrorException,
+  UnauthorizedException,
+} from '@nestjs/common';
 
 @EntityRepository(Register)
 export class RegisterRepository extends Repository<Register> {
@@ -10,7 +13,7 @@ export class RegisterRepository extends Repository<Register> {
     const register = new Register();
     const key = await this.generateKey();
     try {
-      const isExist = this.find({ where: { apiKey: key } });
+      const isExist = this.findOne({ where: { apiKey: key } });
 
       if (isExist) {
         register.apiKey = await this.generateKey();
@@ -27,6 +30,14 @@ export class RegisterRepository extends Repository<Register> {
     registerResponse.message = 'success !';
     registerResponse.apiKey = register.apiKey;
     return registerResponse;
+  }
+
+  async findUser(apiKey: string): Promise<Register> {
+    const isExist = this.findOne({ where: { apiKey: apiKey } });
+    if (!isExist) {
+      throw new UnauthorizedException('Api key validation Failed');
+    }
+    return isExist;
   }
 
   async generateKey(): Promise<string> {
