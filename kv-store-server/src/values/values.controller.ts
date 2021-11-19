@@ -1,7 +1,9 @@
+import { GetRequestDto } from './dto/get-request.dto';
 import { ValueService } from './values.service';
-import { Controller, Param, Post } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { SetRequestDto } from './dto/set-request.dto';
 import { SetResponse } from './dto/set-response.dto';
+import { GetResponse } from './dto/get-response.dto';
 
 @Controller()
 export class ValueController {
@@ -11,8 +13,8 @@ export class ValueController {
   setValue(@Param() setRequestDto: SetRequestDto): Promise<SetResponse> {
     return this.valueService.setValue(setRequestDto);
   }
-  @Post('get/:apiKey/:key')
-  getValue() {
-    return this.valueService.getValue();
+  @Get('get/:apiKey/:key')
+  getValue(@Param() getRequestDto: GetRequestDto): Promise<GetResponse> {
+    return this.valueService.getValue(getRequestDto);
   }
 }

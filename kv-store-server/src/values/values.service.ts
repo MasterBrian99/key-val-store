@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { GetRequestDto } from './dto/get-request.dto';
+import { GetResponse } from './dto/get-response.dto';
 import { SetRequestDto } from './dto/set-request.dto';
 import { SetResponse } from './dto/set-response.dto';
 
@@ -15,7 +17,7 @@ export class ValueService {
   async setValue(setRequestDto: SetRequestDto): Promise<SetResponse> {
     return this.valueRepository.setValue(setRequestDto);
   }
-  async getValue() {
-    return this.valueRepository.getValue();
+  async getValue(getRequestDto: GetRequestDto): Promise<GetResponse> {
+    return this.valueRepository.getValue(getRequestDto);
   }
 }

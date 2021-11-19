@@ -5,11 +5,9 @@ import {
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
-  Unique,
 } from 'typeorm';
 
 @Entity({ name: 'values' })
-@Unique(['key'])
 export class Values extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: string;
