@@ -9,7 +9,10 @@ const SetValues = () => {
           2.API for Setting up a value
         </h3>
         <div className="notification is-primary api-key-show has-text-centered box">
-          <strong>{apiUrl} Pellentesque risus mi</strong>
+          <strong>
+            {apiUrl}
+            {'set/{Api Key}/{Key}/{Value}'}
+          </strong>
         </div>
       </div>
     </div>

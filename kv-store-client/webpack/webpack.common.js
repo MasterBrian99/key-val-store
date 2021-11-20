@@ -32,8 +32,9 @@ module.exports = {
     ],
   },
   output: {
-    path: path.resolve(__dirname, '..', './build'),
+    path: path.resolve(__dirname, '..',  '..','./kv-store-server/build'),
     filename: 'bundle.js',
+    clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
