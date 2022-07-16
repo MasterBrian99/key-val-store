@@ -10,7 +10,10 @@ const GetValues = () => {
         </h3>
         <div className="notification is-warning api-key-show box  has-text-centered ">
           <strong>
-            {apiUrl}
+            
+            
+            
+            {apiUrl}    
             {'get/{Api Key}/{Key}'}
           </strong>
         </div>
